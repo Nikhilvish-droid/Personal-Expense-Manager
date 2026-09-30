@@ -1,0 +1,27 @@
+:root {
+  --ink: #12160F;
+  --paper: #FFFFFF;
+  --surface: #FFFFFF;
+  --border: #DBDFD6;
+  --text: #14170F;
+  --text-muted: #666B60;
+  --accent: #2F7D4F;
+  --accent-dark: #1F5A38;
+  --accent-tint: #E4EFE7;
+  --neutral-tint: #ECECE7;
+
+  --font-sans: 'IBM Plex Sans', -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius: 6px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
