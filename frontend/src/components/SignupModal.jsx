@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import logo from '../assets/FinNest.png'
 
 function SignupModal({ onClose, onSwitchToLogin }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     if (name === '' || email === '' || password === '') {
@@ -14,12 +13,39 @@ function SignupModal({ onClose, onSwitchToLogin }) {
       return
     }
 
-    alert('Account created. Please log in.')
-    setName('')
-    setEmail('')
-    setPassword('')
-    onSwitchToLogin()
-  }
+    try {
+      const response = await fetch('http://localhost:8082/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password
+        })
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        alert(data.message || 'Signup failed.')
+        return
+      }
+
+      alert('Account created successfully. Please log in.')
+
+      setName('')
+      setEmail('')
+      setPassword('')
+
+      onSwitchToLogin()
+
+    } catch (error) {
+      console.error(error)
+      alert('Unable to connect to the server.')
+    }
+  } 
 
   return (
     <div
@@ -31,7 +57,6 @@ function SignupModal({ onClose, onSwitchToLogin }) {
     >
       <div className="login-box">
         <button type="button" className="close-button" onClick={onClose}>×</button>
-        <img src={logo} alt="FinNest" className="login-logo" />
         <h2>Create Account</h2>
         <p>Join FinNest to manage your money</p>
         <form onSubmit={handleSubmit}>
@@ -61,18 +86,6 @@ function SignupModal({ onClose, onSwitchToLogin }) {
           />
           <button type="submit" className="login-submit">Sign Up</button>
         </form>
-        <p className="signup-text">
-          Already have an account?{' '}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              onSwitchToLogin()
-            }}
-          >
-            Login
-          </a>
-        </p>
       </div>
     </div>
   )

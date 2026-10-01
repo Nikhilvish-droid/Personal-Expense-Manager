@@ -119,8 +119,8 @@ section {
                      HOME PAGE
 ===================================================== */
 .hero {
-    min-height: 650px;
-    padding: 80px 8%;
+    min-height: 459px;
+    padding: 54px 12%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -142,7 +142,7 @@ section {
 }
 
 .hero h1 {
-    font-size: 58px;
+    font-size: 50px;
     line-height: 1.1;
     color: var(--text);
     margin-bottom: 25px;
@@ -198,7 +198,7 @@ section {
 /* FINANCE PREVIEW CARD */
 .finance-preview {
     width: 450px;
-    padding: 27px;
+    padding: 14px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -280,14 +280,14 @@ section {
                     PUBLIC SECTIONS
 ===================================================== */
 .public-section {
-    padding: 100px 8%;
+    padding: 9px 8%;
     background: var(--surface);
 }
 
 .section-heading {
     text-align: center;
     max-width: 750px;
-    margin: 0 auto 50px;
+    margin: 0 auto 20px;
 }
 
 .section-heading p {
@@ -476,7 +476,7 @@ tbody tr:last-child td { border-bottom: none; }
 .delete-button { background: var(--surface); color: var(--ink); border: 1px solid var(--ink); }
 .delete-button:hover { background: var(--ink); color: #fff; }
 
-.form-section { display: none; padding: 80px 8%; background: var(--paper); }
+.form-section { display: none; padding: 10px 8%; padding-top: 0px; background: var(--paper); }
 .form-box { max-width: 520px; margin: auto; padding: 35px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
 .form-header { display: flex; justify-content: space-between; margin-bottom: 25px; }
 .form-header p, .form-label { color: var(--accent-dark); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
@@ -604,4 +604,222 @@ footer small { color: #8A9088; }
     .nav-links { display: none; }
     .hero h1 { font-size: 43px; }
     .dashboard-grid, .income-grid, .savings-grid, .analytics-grid, .feature-grid, .summary-grid { grid-template-columns: 1fr; }
+}
+
+
+
+.ledger-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.ledger-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.ledger-balance-block .dashboard-label {
+    margin-bottom: 6px;
+}
+
+.hero-balance-val {
+    font-size: clamp(38px, 4.5vw, 54px);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 6px 0;
+}
+
+.hero-balance-meta {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+.ledger-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ledger-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: 0.15s ease;
+}
+
+.ledger-btn-dark {
+    background: var(--ink);
+    color: #fff;
+    border: 1px solid var(--ink);
+}
+
+.ledger-btn-dark:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+.ledger-btn-accent {
+    background: var(--accent-tint);
+    color: var(--accent-dark);
+    border: 1px solid var(--accent);
+}
+
+.ledger-btn-accent:hover {
+    border-color: var(--accent-dark);
+}
+
+.ledger-btn-outline {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.ledger-btn-outline:hover {
+    border-color: var(--ink);
+}
+
+/* Continuous Segmented Metrics Strip */
+.metrics-strip {
+    display: flex;
+    margin: 28px 0 35px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.metric-strip-item {
+    flex: 1;
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-strip-item:last-child {
+    border-right: none;
+}
+
+.strip-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.strip-icon {
+    font-size: 16px;
+}
+
+.strip-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.strip-value {
+    font-size: 22px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.strip-caption {
+    font-size: 12px;
+    color: var(--accent-dark);
+}
+
+/* Activity / Ledger List */
+.ledger-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+}
+
+.ledger-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.ledger-card-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 4px 0;
+}
+
+.ledger-card-header p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+.view-link {
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.view-link:hover {
+    text-decoration: underline;
+}
+
+.ledger-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.ledger-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.ledger-row:last-child {
+    border-bottom: none;
+}
+
+.ledger-row-left {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .metrics-strip {
+        flex-direction: column;
+    }
+    .metric-strip-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .metric-strip-item:last-child {
+        border-bottom: none;
+    }
+    .ledger-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

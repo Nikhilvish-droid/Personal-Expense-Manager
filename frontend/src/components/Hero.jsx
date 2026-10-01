@@ -10,10 +10,6 @@ function Hero({ onGetStarted, onExploreFeatures }) {
           Track your spending, manage your income, understand your financial
           habits, and make smarter money decisions — all in one place.
         </p>
-        <div className="hero-buttons">
-          <button className="get-started" onClick={onGetStarted}>Get Started</button>
-          <button className="learn-more" onClick={onExploreFeatures}>Explore Features</button>
-        </div>
       </div>
 
       <div className="finance-preview">
@@ -22,7 +18,6 @@ function Hero({ onGetStarted, onExploreFeatures }) {
             <p>Financial Overview</p>
             <h3>My Finances</h3>
           </div>
-          <span className="status-dot">●</span>
         </div>
 
         <div className="preview-balance">

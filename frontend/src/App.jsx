@@ -15,18 +15,26 @@ import ProfilePage from './pages/ProfilePage'
 import './App.css'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState(() => {
+  const savedUser = localStorage.getItem('user')
+  return savedUser ? JSON.parse(savedUser) : null})
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('user') !== null})
   const [activeModal, setActiveModal] = useState(null) // 'login' | 'signup' | null
   const [isExpenseFormOpen, setIsExpenseFormOpen] = useState(false)
   const navigate = useNavigate()
 
-  function handleLogin() {
+  function handleLogin(userData) {
+    setUser(userData)
+    localStorage.setItem('user', JSON.stringify(userData))
     setActiveModal(null)
     setIsLoggedIn(true)
     navigate('/dashboard')
   }
 
   function handleLogout() {
+    localStorage.removeItem('user')
+    setUser(null)
     setIsLoggedIn(false)
     setIsExpenseFormOpen(false)
     navigate('/')
@@ -69,7 +77,8 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <DashboardPage
+             <DashboardPage
+                user={user}
                 onLogout={handleLogout}
                 onViewAllTransactions={() => navigate('/expenses')}
                 onAddExpense={openExpenseForm}
@@ -78,20 +87,25 @@ function App() {
               />
             }
           />
-          <Route
-            path="/expenses"
-            element={
+          <Route path="/expenses" element={
               <ExpensesPage
+                user={user}
                 isExpenseFormOpen={isExpenseFormOpen}
                 onOpenExpenseForm={() => setIsExpenseFormOpen(true)}
                 onCloseExpenseForm={() => setIsExpenseFormOpen(false)}
               />
             }
           />
-          <Route path="/income" element={<IncomePage />} />
-          <Route path="/savings" element={<SavingsGoalsPage />} />
-          <Route path="/analytics" element={<AnalyticsPage />} />
-          <Route path="/profile" element={<ProfilePage onLogout={handleLogout} />} />
+          <Route path="/income" element={<IncomePage user={user} />}/>
+          <Route path="/savings" element={<SavingsGoalsPage user={user} />}/>
+          <Route path="/analytics" element={<AnalyticsPage user={user} />}/>
+          <Route path="/profile" element={
+              <ProfilePage
+                user={user}
+                onLogout={handleLogout}
+              />
+            }
+          />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

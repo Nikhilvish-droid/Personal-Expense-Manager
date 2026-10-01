@@ -19,9 +19,9 @@ export const features = [
   },
   {
     title: 'search filter',
-    icon: '🔎',
-    heading: 'Search & Filter',
-    description: 'Quickly find transactions using search and filters.',
+    icon: '🗝️',
+    heading: 'Saving for goal',
+    description: 'Quickly add goal and start contributing money.',
   },
 ]
 

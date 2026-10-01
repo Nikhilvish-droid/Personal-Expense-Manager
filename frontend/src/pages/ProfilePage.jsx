@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-function ProfilePage({ onLogout }) {
+function ProfilePage({ user, onLogout }) {
   const [isEditing, setIsEditing] = useState(false)
-  const [name, setName] = useState('Rohan Mehta')
-  const [email, setEmail] = useState('rohan.mehta21@gmail.com')
-  const [password, setPassword] = useState('rohan@2026')
+
+  const [name, setName] = useState(user?.name || '')
+  const [email, setEmail] = useState(user?.email || '')
 
   const initials = name
     .trim()
@@ -16,18 +16,24 @@ function ProfilePage({ onLogout }) {
 
   function handleSave(e) {
     e.preventDefault()
+
+    alert('Profile update API is not connected yet.')
     setIsEditing(false)
   }
 
   return (
     <section id="profile" className="profile-section">
+
       <div className="section-heading">
         <p>ACCOUNT</p>
         <h2>Your Profile</h2>
       </div>
 
       <div className="profile-card">
-        <div className="profile-avatar">{initials}</div>
+
+        <div className="profile-avatar">
+          {initials}
+        </div>
 
         {!isEditing ? (
           <>
@@ -35,30 +41,59 @@ function ProfilePage({ onLogout }) {
             <p>{email}</p>
 
             <div className="profile-info">
+
               <div className="profile-info-row">
-                <span className="profile-info-label">Name</span>
-                <span className="profile-info-value">{name}</span>
+                <span className="profile-info-label">
+                  Name
+                </span>
+
+                <span className="profile-info-value">
+                  {name}
+                </span>
               </div>
+
               <div className="profile-info-row">
-                <span className="profile-info-label">Email</span>
-                <span className="profile-info-value">{email}</span>
+                <span className="profile-info-label">
+                  Email
+                </span>
+
+                <span className="profile-info-value">
+                  {email}
+                </span>
               </div>
-              <div className="profile-info-row">
-                <span className="profile-info-label">Password</span>
-                <span className="profile-info-value">{'•'.repeat(password.length)}</span>
-              </div>
+
             </div>
 
             <div className="profile-actions">
-              <button type="button" className="edit-profile-btn" onClick={() => setIsEditing(true)}>
+
+              <button
+                type="button"
+                className="edit-profile-btn"
+                onClick={() => setIsEditing(true)}
+              >
                 Edit Profile
               </button>
-              <button onClick={onLogout} className="profile-logout">Logout</button>
+
+              <button
+                onClick={onLogout}
+                className="profile-logout"
+              >
+                Logout
+              </button>
+
             </div>
           </>
         ) : (
-          <form className="profile-edit-form" onSubmit={handleSave}>
-            <label htmlFor="profile-name">Name</label>
+
+          <form
+            className="profile-edit-form"
+            onSubmit={handleSave}
+          >
+
+            <label htmlFor="profile-name">
+              Name
+            </label>
+
             <input
               id="profile-name"
               type="text"
@@ -67,7 +102,10 @@ function ProfilePage({ onLogout }) {
               required
             />
 
-            <label htmlFor="profile-email">Email</label>
+            <label htmlFor="profile-email">
+              Email
+            </label>
+
             <input
               id="profile-email"
               type="email"
@@ -76,24 +114,35 @@ function ProfilePage({ onLogout }) {
               required
             />
 
-            <label htmlFor="profile-password">Password</label>
-            <input
-              id="profile-password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-
             <div className="profile-actions">
-              <button type="button" className="cancel-button" onClick={() => setIsEditing(false)}>
+
+              <button
+                type="button"
+                className="cancel-button"
+                onClick={() => {
+                  setName(user?.name || '')
+                  setEmail(user?.email || '')
+                  setIsEditing(false)
+                }}
+              >
                 Cancel
               </button>
-              <button type="submit" className="profile-save-btn">Save Changes</button>
+
+              <button
+                type="submit"
+                className="profile-save-btn"
+              >
+                Save Changes
+              </button>
+
             </div>
+
           </form>
+
         )}
+
       </div>
+
     </section>
   )
 }

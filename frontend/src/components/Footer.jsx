@@ -3,7 +3,6 @@ function Footer() {
     <footer>
       <div>
         <h3>FinNest</h3>
-        <p>Track. Manage. Grow.</p>
       </div>
       <div>
         <small>© 2026 FinNest. All rights reserved.</small>

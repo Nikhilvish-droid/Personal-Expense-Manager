@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import logo from '../assets/FinNest.png'
 
 function LoginModal({ onClose, onSwitchToSignup, onLogin }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     if (email === '' || password === '') {
@@ -13,9 +12,34 @@ function LoginModal({ onClose, onSwitchToSignup, onLogin }) {
       return
     }
 
-    onLogin()
-    setEmail('')
-    setPassword('')
+    try{
+      const response = await fetch('http://localhost:8082/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        alert(data.message || 'login failed.')
+        return
+      }
+
+      onLogin(data)
+      setEmail('')
+      setPassword('')
+
+    }catch (error) {
+      console.error(error)
+      alert('Unable to connect to the server.')
+    }
+
   }
 
   return (
@@ -28,7 +52,6 @@ function LoginModal({ onClose, onSwitchToSignup, onLogin }) {
     >
       <div className="login-box">
         <button type="button" className="close-button" onClick={onClose}>×</button>
-        <img src={logo} alt="FinNest" className="login-logo" />
         <h2>Welcome Back!</h2>
         <p>Login to continue to FinNest</p>
         <form onSubmit={handleSubmit}>
@@ -48,24 +71,8 @@ function LoginModal({ onClose, onSwitchToSignup, onLogin }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className="login-options">
-            <label className="remember"><input type="checkbox" /> Remember me</label>
-            <a href="#">Forgot Password?</a>
-          </div>
           <button type="submit" className="login-submit">Login</button>
         </form>
-        <p className="signup-text">
-          Don't have an account?{' '}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              onSwitchToSignup()
-            }}
-          >
-            Sign Up
-          </a>
-        </p>
       </div>
     </div>
   )
